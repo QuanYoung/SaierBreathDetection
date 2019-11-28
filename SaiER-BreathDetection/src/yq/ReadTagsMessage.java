@@ -15,7 +15,7 @@ public class ReadTagsMessage {
 //	public static void main(String[] args) {
 		
 //	}
-	  public static void readTags(PrintStream socketOutput) {
+	  public static void readTags(PrintStream socketOutput,String ReaderAddress,String tag1EPC,String tag2EPC) {
 
 //		 ArrayList<Double> t1Time=null;
 //         ArrayList<Double> t2Time=null;
@@ -26,7 +26,7 @@ public class ReadTagsMessage {
 		
 
 	        try {
-	            String hostname = "192.168.1.81";
+	            String hostname =ReaderAddress;
 
 
 	            ImpinjReader reader = new ImpinjReader();
@@ -79,7 +79,7 @@ public class ReadTagsMessage {
 				
 //	            reader.setTagReportListener(new getTagMessage("1012","E200407487020230140088B5",flag,initialtime,tWindow,t1Time,t1Phase,t2Time,t2Phase,tTime,tPhase));//E20040748702024021803629 E2004074870202300380EEA9 E2004074870202330960B8D5 E20040748702023222602E3B
 //	            reader.setTagReportListener(new getTagMessage("E20050110418017524901855","E20050110418024325001737",socketOutput));//中南标签E20040748702024021803629 E2004074870202300380EEA9 E2004074870202330960B8D5 E20040748702023222602E3B
-	            reader.setTagReportListener(new getTagMessage("E20040748702023117606060","E2004074870202400980B8D9",initialtime,flag,socketOutput));//湖大标签E20040748702024021803629 E2004074870202300380EEA9 E2004074870202330960B8D5 E20040748702023222602E3B
+	            reader.setTagReportListener(new getTagMessage(tag1EPC,tag2EPC,initialtime,flag,socketOutput));//湖大标签E20040748702024021803629 E2004074870202300380EEA9 E2004074870202330960B8D5 E20040748702023222602E3B
 
 	           //				reader.setTagReportListener(new getTagMessage("E2005011041802062490188D","E2005011041802062490188D"));E20050110418017524901855
 					System.out.println("Applying Settings");

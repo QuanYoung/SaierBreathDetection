@@ -1,5 +1,11 @@
 package yq;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 
 public class Utils {
@@ -246,4 +252,89 @@ public static double[] domeanfilter(double[][] arr) {
 	return x;
 }
 
+public static String[][] File2ArrayIDtoIPv6( File f) {//文件转数组
+	BufferedReader br=null;
+	String arr[][]=new String[(int) (getFileLineCount(f))][2];//第一列用户ID第二列IPv6地址
+	try {
+		 br=new BufferedReader(new FileReader(f));//读文件
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		System.out.println("文件不存在");
+		e.printStackTrace();
+	}
+	
+	String temps;
+	int count=0;
+		try {
+			while((temps=br.readLine())!=null){
+				String tempstr1[]=temps.split(" ");
+				arr[count][0]=tempstr1[0];
+				arr[count][1]=tempstr1[1];
+				count++;
+			}
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("IDtoIPv6数据获取完毕！！！");
+		return arr;
+}
+
+public static String[][] File2ArrayIpv6toUserInfo( File f) {//文件转数组
+	BufferedReader br=null;
+	String arr[][]=new String[(int) (getFileLineCount(f))][4];//第0列ipv6地址 第一列用户阅读器地址第二列tag1 epc第二列tag2 epc
+	try {
+		 br=new BufferedReader(new FileReader(f));//读文件
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		System.out.println("文件不存在");
+		e.printStackTrace();
+	}
+	
+	String temps;
+	int count=0;
+		try {
+			while((temps=br.readLine())!=null){
+				String tempstr1[]=temps.split(" ");
+				arr[count][0]=tempstr1[0];
+				arr[count][1]=tempstr1[1];
+				arr[count][2]=tempstr1[2];
+				arr[count][3]=tempstr1[3];
+				count++;
+			}
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Ipv6toUserInfo数据获取完毕！！！");
+		return arr;
+}
+
+/**
+ * @return 获取文件的行数用于数组大小设置 返回一个int值
+ */
+public static int getFileLineCount(File file) {//获取文件行数
+    int cnt = 0;
+    LineNumberReader reader = null;
+    try {
+        reader = new LineNumberReader(new FileReader(file));
+        @SuppressWarnings("unused")
+        String lineRead = "";
+        while ((lineRead = reader.readLine()) != null) {
+        }
+        cnt = reader.getLineNumber();
+    } catch (Exception ex) {
+        cnt = -1;
+        ex.printStackTrace();
+    } finally {
+        try {
+            reader.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    return cnt;
+}
 }

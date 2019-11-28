@@ -63,7 +63,7 @@ public class Client {
 		//连接服务器，端口8008，超时时间10000
 //		socket.connect(new InetSocketAddress(InetAddress.getByName("2001:da8:270:2021:0:0:0:88"),8008), 50000);
 //		System.setProperty("java.net.preferIPv6Addresses","true");
-		socket.connect(new InetSocketAddress(Inet6Address.getLocalHost(),8008), 1000000);
+		socket.connect(new InetSocketAddress(Inet6Address.getLocalHost(),8006), 1000000);
 
 		System.out.println("已经发送服务器连接，并进入后续流程");
 		System.out.println("客户端信息： "+socket.getLocalAddress()+" 端口："+socket.getLocalPort());
